@@ -1,0 +1,22 @@
+services:
+  officecli-mcp:
+    build: .
+    image: officecli-mcp-http:local
+    init: true
+    environment:
+      OFFICECLI_MCP_TOKEN: ${OFFICECLI_MCP_TOKEN:?Run python scripts/setup_env.py}
+      OFFICECLI_MCP_SIGNING_SECRET: ${OFFICECLI_MCP_SIGNING_SECRET:?Run python scripts/setup_env.py}
+      OFFICECLI_MCP_PUBLIC_BASE_URL: ${OFFICECLI_MCP_PUBLIC_BASE_URL:-http://localhost:18080}
+      OFFICECLI_MCP_ALLOWED_HOSTS: ${OFFICECLI_MCP_ALLOWED_HOSTS:-localhost:*,127.0.0.1:*,officecli-mcp:*}
+      OFFICECLI_MCP_MAX_FILE_MB: ${OFFICECLI_MCP_MAX_FILE_MB:-25}
+    ports:
+      - "127.0.0.1:${OFFICECLI_MCP_HOST_PORT:-18080}:8080"
+    volumes:
+      - officecli_data:/data
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+volumes:
+  officecli_data:

@@ -1,0 +1,6 @@
+OfficeCLI MCP HTTP adapter — Copyright 2026 Jungwoo Ryu
+The adapter invokes the unmodified iOfficeAI/OfficeCLI v1.0.158 release binary.
+Upstream: https://github.com/iOfficeAI/OfficeCLI/tree/v1.0.158
+OfficeCLI is Copyright 2026 OfficeCLI (https://OfficeCLI.AI), Apache-2.0.
+The binary's notices are retained under vendor/officecli/ and included in the image.
+This project is an independent adapter; it is not an official OfficeCLI distribution.

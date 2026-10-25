@@ -1,0 +1,13 @@
+.git
+.env
+.env.*
+.venv
+**/node_modules
+**/__pycache__
+.pytest_cache
+.ruff_cache
+tests
+examples
+vendor/officecli/officecli
+data
+*.log

@@ -1,0 +1,8 @@
+{
+  "name": "officecli-mcp-webapp-example",
+  "private": true,
+  "type": "module",
+  "scripts": {"check": "tsc --noEmit"},
+  "dependencies": {"@modelcontextprotocol/sdk": "^1.25.0", "openai": "^6.0.0"},
+  "devDependencies": {"typescript": "^5.9.0", "@types/node": "^22.0.0"}
+}

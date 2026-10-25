@@ -1,0 +1,28 @@
+name: Verify OfficeCLI MCP
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+          enable-cache: true
+      - run: uv sync --frozen --group dev
+      - run: python scripts/download_officecli.py
+      - run: uv run ruff check .
+      - run: uv run pytest -q
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: examples/webapp/package-lock.json
+      - run: npm ci --prefix examples/webapp && npm run check --prefix examples/webapp
+      - run: python scripts/setup_env.py
+      - run: docker compose up -d --build --wait --wait-timeout 60
+      - run: uv run python scripts/smoke_http.py
+      - if: always()
+        run: docker compose down
