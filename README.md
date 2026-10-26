@@ -153,6 +153,12 @@ curl --fail-with-body -X PUT http://localhost:18080/api/files/budget.xlsx \
 - OfficeCLI의 수식 평가는 Excel 전체 엔진과 동일하지 않습니다. 입력값 수정 후 기존 수식의 저장 캐시가 비워질 수 있으며 Excel에서 열면 재계산됩니다. `office_get`의 `computedValue`로 지원되는 수식의 계산값을 조회할 수 있습니다. 지원되지 않는 함수나 고급 서식은 실제 파일로 확인하세요.
 - 엔진 바이너리는 공식 릴리스 **v1.0.158**과 SHA-256을 고정합니다. 컨테이너에서 자동 업데이트를 끕니다. Linux amd64/arm64를 지원하며 arm64 체크섬도 포함되어 있습니다. 이 작업의 실제 실행 검증은 amd64에서 했습니다.
 
+## 신규 문서·첨부 양식 검증
+
+한글 신규 문서 생성과 DOCX/XLSX 양식 업로드 → 읽기 → 수정 → 다운로드를 실제 Streamable HTTP로 검증합니다. Word의 기존 run 서식·머리글·바닥글·표 스타일, Excel의 수식·병합 셀·차트·입력 규칙을 검사하고 원본 파일이 그대로인지 바이트로 비교합니다.
+
+[상세 검증 결과·재현 방법](docs/validation.md)과 [실행 가능한 시나리오 테스트](tests/test_document_workflows.py)를 참고하세요. `.docx`/`.xlsx` 양식을 지원하며 `.dotx`/`.xltx` 전용 템플릿 확장자는 현재 지원하지 않습니다. 실제 웹앱과 LLM의 자연어 해석은 별도 연결 검증이 필요합니다.
+
 ## 개발·검증
 
 ```bash

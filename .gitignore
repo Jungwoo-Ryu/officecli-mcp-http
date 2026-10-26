@@ -11,3 +11,4 @@ vendor/officecli/officecli
 *.log
 data/
 dist/
+validation-artifacts/
